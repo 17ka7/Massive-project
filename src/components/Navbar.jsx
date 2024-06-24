@@ -3,20 +3,17 @@ import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 
 export const Navbar = () => {
-  const [isloggedIn, setIsLoggedIn] = useState(false)
-  const handleBtn = () => {
-    if(isloggedIn){
-      console.log('LOGOUT')
-      isloggedIn(false)
-    }else{
-      console.log('LOGIN')
-      isloggedIn(true)
-    }
-  }
+  const [isOpen, setIsOpen] = useState(false)
+  
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+  
+  
   return (
     <>
     <div className="bg-custom-blue p-4 font-normal text-custom-white">
-      <div className="flex flex-row justify-between items-center container mx-auto text-[16px] sm:text-[1rem] xl:text-[1.4rem] lg:text-[1.3rem] md:text-[1.2rem] ">
+      <div className="flex flex-row justify-between  container mx-auto xl:text-p md:text-[20px] lg:text-[20px] sm:text-size-15px items-center ">
         <div>
           <img src="../src/logo.png" alt="DiabeTech" className="xl:w-fit lg:w-40 md:w-32 sm: w-24"/>
         </div>
@@ -25,9 +22,9 @@ export const Navbar = () => {
 
           <li>
           <NavLink
-            to="/home" exact 
+            to="/" exact 
             className={({ isActive }) =>
-              isActive ? 'border-b-4 border-custom-pink font-semibold duration-[5000ms] ' : 'text-pink'
+              isActive ? 'border-b-4 border-custom-pink font-semibold duration-[1000ms] ' : 'text-pink'
             }
           >Home</NavLink>
           </li>
@@ -35,18 +32,18 @@ export const Navbar = () => {
           <NavLink
             to="/education"
             className={({ isActive }) =>
-              isActive ? 'border-b-4 border-custom-pink font-semibold duration-[5000ms]' : 'text-pink'
+              isActive ? 'border-b-4 border-custom-pink font-semibold duration-[1000ms]' : 'text-pink'
             }
           >Education</NavLink>
           </li>
           <li>
-            <NavLink to="/predict" className={({isActive}) => isActive? 'border-b-4 border-custom-pink font-semibold duration-[5000ms] ' : 'text-pink'}>Predict</NavLink>
+            <NavLink to="/predict" className={({isActive}) => isActive? 'border-b-4 border-custom-pink font-semibold duration-[1000ms] ' : 'text-pink'}>Predict</NavLink>
           </li>
           <li>
-            <NavLink to="/healthcontrol" className={({isActive}) => isActive? 'border-b-4 border-custom-pink font-semibold duration-[5000ms] ' : 'text-pink'}>Health Control</NavLink>
+            <NavLink to="/healthcontrol" className={({isActive}) => isActive? 'border-b-4 border-custom-pink font-semibold duration-[1000ms] ' : 'text-pink'}>Health Control</NavLink>
           </li>
           <li>
-            <NavLink to="/forum" className={({isActive}) => isActive? 'border-b-4 border-custom-pink font-semibold duration-[5000ms]' : 'text-pink'}>Forum</NavLink>
+            <NavLink to="/forum" className={({isActive}) => isActive? 'border-b-4 border-custom-pink font-semibold duration-[1000ms]' : 'text-pink'}>Forum</NavLink>
           </li>
         
         </ul>

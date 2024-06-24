@@ -1,12 +1,20 @@
 import Footer from '../components/Footer';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import Button from '../components/Button';
+import Navbar from '../components/Navbar';
+import Info from '../components/Info';
+
+
 
 function Education() {
+ const [showInfo, setShowInfo] = useState(true)
+
   return(
     <>
-    <Button/>
+    {/* <Button/> */}
+    <Navbar/>
+    {showInfo && <Info closeInfo={() => setShowInfo(false)} />}
+    
     <div className=' text-custom-black bg-custom-white font-poppins xl:text-p lg:text-2xl md:text-[20px] sm:text-size-15px' >
       <div className="bg-[url('../src/image/edukasi/bg-image.png')] bg-cover bg-opacity-65 p-10 ">
         <h1 className=' font-bold  md:text-[48px] justify-center items-center flex text-[25px] p-10'>Apa itu Diabetes ?</h1>
@@ -132,12 +140,10 @@ function Education() {
               <p className='text-justify'>Setelah mengetahui semuanya, Anda akan dapat melakukan pengecekan secara online melalui platform DiabeTech untuk mengetahui apakah Anda memiliki diabetes.</p>
 
               <NavLink to="/predict" className={({ isActive }) => isActive? 'font-bold': 'text-white' }>
-                <button className='bg-custom-pink ml-5 text-custom-white font-semibold p-3 rounded-lg md:text-[20px] lg:text-[20px] sm:text-size-15px items-center'>Check Now</button>
+                <button className='bg-custom-pink ml-5 text-custom-white font-semibold p-3 rounded-lg xl:text-p md:text-[20px] lg:text-[20px] sm:text-size-15px items-center'>Check Now</button>
               </NavLink>
             </div>
             
-
-
           </div>
         </div>
       </div>
@@ -146,7 +152,7 @@ function Education() {
     <Footer/>
     </>
   )
-  // ... component logic
+
 }
 
 export default Education; // Add the default export

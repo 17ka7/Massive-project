@@ -1,32 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import axios from 'axios';
 
-const Login = () => {
-    const userRef = useRef('')
-    const errRef = useRef()
+const Login = ({user, setLoggedIn}) => {
+    const [formData, setFormData] = useState({
+        username: '', password: '', message: ''
+    })
 
-    const [username, setUsername] = useState('')
-    const [password, setPassword] =useState('')
-    const [message, setMessage] = useState('')   
+    const handleChange = (e) =>{
+        const {name, value} = e.target;
+        setFormData((prevData) => ({
+            ...prevData, [name]: value,
+        }))
+    }
+
     
-    const handleLogin = async (e) => {
-        e.preventDeafault();
+    const handSubmit = async (e) => {
+        e.preventDefault();
         try {
-            const response = await fetch('https://api.dna-service.com/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({username, password})
-            })
-            const data = await response.json();
-            if(response.ok){
-                setMessage('Login Sucessful!')
-            }else{
-                setMessage(data.error)
-            }
-
+            const response = await axios.post('/api/users/login', formData)
+            const {token} = response.data;
+            localStorage.setItem('token', token) // simpan token di localstorage
+            setLoggedIn(true); //set state untuk menunjukkan user sudah login
         } catch (error) {
-            setMessage('An error occurred. Please try again.')
+            console.error('Login failed:', error)
+            alert('Invalid credentials');
         }
+        
     }
 
   return (
@@ -38,8 +38,8 @@ const Login = () => {
                 <div className='flex flex-col gap-32'>
                     <img src="../src/logo.png" alt="yuhuu" width={250} className='ml-10 mt-5 flex'/>
                 </div>
-                <div className='flex justify-center items-center pt-32 md:w-4/5 md:ml-20'>
-                    <img src="../src/Image/account/Sign In.png" alt="yuhuu" width={700} className='' />
+                <div className='flex justify-center items-center mt-8'>
+                    <img src="../src/Image/account/Sign In.png" alt="yuhuu" className='xl:w-4/6 sm:w-3/44 sm:mt-48 md:w-3/4 xl:mt-10' />
                 </div>
             </div>
         </div>
@@ -55,26 +55,35 @@ const Login = () => {
                 </a>
             </div>
 
-            <h3 className='uppercase text-size-15px font-extrabold font-poppins'>Start your jurney</h3>
-            <h1 className='text-custom-blue text-h1-log/reg pb-2 font-semibold font-poppins'>Sign In To DiabeTech</h1>
+            <h3 className=' text-[20px] font-bold font-poppins'>Mulai Menjelajah</h3>
+            <h1 className='text-custom-blue text-h1-log/reg pb-2 font-semibold font-poppins'>Masuk ke Diabetech</h1>
 
             <div className='flex'>
-                <p className=' font-josefin'>Dont't have an account ?</p>
+                <p className=' font-josefin'>Tidak punya akun ?</p>
                 <Link to="/register">
-                    <a href=""  className='text-custom-blue pl-2 font-josefin'>Sign Up</a>
+                    <a href=""  className='text-custom-blue pl-2 font-josefin'>Daftar</a>
                 </Link>      
             </div>
 
-            <form action="" className='flex flex-col pt-8 font-poppins text-size-15px sm:text-xs md:text-xl lg:font-1xl xl:text-2xl '>
+            <form onSubmit={handSubmit}  action="" className='flex flex-col pt-8 font-poppins text-[17px] sm:text-xs md:text-xl lg:font-1xl xl:text-2xl '>
                 <div className='flex flex-col'>
-                    <label htmlFor="username" className='uppercase py-2 font-bold'>Username</label>
-                    <input type="text" name="username" id="username" className='border-2 border-custom-blue p-3 rounded-md'/>
+                    <label htmlFor="username" className='uppercase py-2 
+                    font-bold'>Username</label>
+                    <div className='flex border-2 border-custom-blue p-3 rounded-md'>
+                      <input type="text" name='username' value={formData.username} onChange={handleChange} required className='w-full bg-custom-white outline-none text-xl'/>
+                      <img src="../src/Image/account/Person.svg" alt="" />  
+                    </div>
+                    
                 </div>
                 <div className='flex flex-col'>
                     <label htmlFor="password" className='uppercase py-2 font-bold'>Password</label>
-                    <input type="password" name="password" id="password" className='border-2 border-custom-blue p-3 rounded-md' />
+                    <div className='flex border-2 border-custom-blue p-3 rounded-md'>
+                     <input type="password" name='password' value={formData.password} onChange={handleChange} required className='w-full bg-custom-white outline-none' />
+                     <img src="../src/Image/account/Password.svg" alt="" />   
+                    </div>
+                    
                 </div>
-                <button type='submit' className='bg-custom-blue text-custom-white p-3 text-size-15px hover:font-extrabold rounded-md my-5 font-semibold uppercase w-full'>sign in</button>
+                <button type='submit' className='bg-custom-blue text-custom-white p-3 text-size-15px hover:font-extrabold rounded-md my-5 font-semibold uppercase w-full'>Masuk</button>
             </form>
             
             <div className='flex justify-center flex-row'>

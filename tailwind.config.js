@@ -16,8 +16,8 @@ export default {
 
     },
     fontFamily: {
-      poppins: ['Poppins', ''],
-      josefin: ['Josefin Sans','']
+      poppins: ['Poppins', 'sans-serif'],
+      josefin: ['Josefin Sans','sans-serif']
     },
     fontSize: {
       'size-15px': '1rem',

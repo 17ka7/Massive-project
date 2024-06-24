@@ -1,17 +1,17 @@
-import Button from '../components/Button'
 import Footer from '../components/Footer'
 import { NavLink } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 
 function Predict() {
   return (
     <>
-    <Button />
+    <Navbar/>
     <div className=' bg-custom-blue font-poppins'>
     <div className='flex flex-row py-12 container mx-auto justify-between'>
-            <div className=' text-custom-white flex flex-col justify-center gap-5'>
-                <h1 className='md:text-[50px] font-semibold mb-4 sm:text-[30pxpx] text-[28px] '>What is the sugar level your blood pressure is higerthan normal?</h1>
+            <div className=' text-custom-white flex flex-col justify-center gap-5 md:mx-8'>
+                <h1 className=' xl:text-[50px] md:text-[40px] font-semibold mb-4 sm:text-[28px] text-[28px] '>Apakah kadar gula anda lebih tinggi dari biasanya ?</h1>
                 <NavLink to="/test" >
-                    <button className='bg-custom-pink p-3 rounded-lg font-semibold md:text-[20px] lg:text-[20px] sm:text-size-15px items-center'>Check Now</button>
+                    <button className='bg-custom-pink p-3 rounded-lg font-semibold xl:text-p md:text-[20px] lg:text-[20px] sm:text-size-15px items-center'>Check sekarang</button>
                 </NavLink>
             </div>
             <div>

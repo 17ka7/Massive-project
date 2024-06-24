@@ -5,7 +5,7 @@ const Footer = () => {
     <>
       <footer className='bg-custom-blue text-custom-white  font-poppins p-8'>
 
-        <div className=' container mx-auto text-[16px] sm:text-[1rem] xl:text-[1.4rem] lg:text-[1.3rem] md:text-[1.2rem] '>
+        <div className=' container mx-auto xl:text-p md:text-[20px] lg:text-[20px] sm:text-size-15px items-center '>
         <img src="../src/logo.png" alt="logo " className=' w-40'/>
             <div className=''>
             <div className='grid grid-cols-6 gap-5 my-5 font-normal'>

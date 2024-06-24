@@ -1,30 +1,31 @@
 import React, { useState } from 'react'
 import { Link, NavLink, json } from 'react-router-dom'
 
-const Register = () => {
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [message, setMessage] = useState('')
+const Register = ({setUser}) => {
+    const [formData, setFormData] =useState({
+        username: '', password: '', email: '', message: ''
+    });
 
-    const handleRegis = async (e) => {
-        e.preventDeafault();
+    
+
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setFormData((prevData) => ({
+            ...prevData, [name]: value,
+        }));
+    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
-            const response = await fetch('https://api.dna-service.com/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({username, email, password})
-            })
-            const data = await response.json();
-            if(response.ok){
-                setMessage('Registration Sucessful!')
-            }else{
-                setMessage(data.error)
-            }
-
+            //respon backend bisa melakukan sesuatu dengan data response
+            const response = await axios.post('/api/users/register', formData)
+            console.log('Registration successful:', response.data);
+            setUser(response.data) // Contoh, set user state setelah register
+            // Redirect atau tindakan lain setelah pendaftaran berhasil
         } catch (error) {
-            setMessage('An error occurred. Please try again.')
+            console.error('Registration failed:', error);
         }
+        
     }
 
   return (
@@ -39,28 +40,39 @@ const Register = () => {
             </div>
             </div> 
 
-        <h3 className='uppercase text-size-15px font-extrabold font-poppins'>Register Now</h3>
-        <h1 className='text-custom-blue text-h1-log/reg pb-2 font-semibold font-poppins'>Sign Up For Free</h1>
+        <h3 className=' text-size-15px font-bold font-poppins'>Daftar Sekarang</h3>
+        <h1 className='text-custom-blue text-[60px] xl:text-[60px] lg:text-h1-log/reg pb-2 font-semibold font-poppins'>Daftar secara gratis</h1>
         <div className='flex'>
-            <p>Already have an account ?</p>
-            <Link to="/login"><button type='submit' className='text-custom-blue pl-2 font-josefin'>Sign In</button></Link>
+            <p>Sudah punya akun ?</p>
+            <Link to="/login"><button type='submit' className='text-custom-blue pl-2 font-josefin'>Masuk</button></Link>
         </div>
-        <form onSubmit={handleRegis} action="" className='flex flex-col pt-8 font-poppins text-size-15px sm:text-xs md:text-xl lg:font-1xl xl:text-2xl'>
+        <form onSubmit={handleSubmit} action="" className='flex flex-col pt-10 font-poppins text-size-15px sm:text-xs md:text-xl lg:font-1xl xl:text-2xl'>
             <div className='flex flex-col'>
                 <label htmlFor="" className='uppercase py-2 font-bold'>Username</label>
-                <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)} required className='border-2 border-custom-blue p-3 rounded-md'/>
+                <div className='flex border-2 border-custom-blue p-3 rounded-md'>
+                  <input type="text" name="username" value={formData.username} onChange={handleChange} required className=' w-full outline-none bg-custom-white'/> 
+                  <img src="../src/Image/account/Person.svg" alt="person" /> 
+                </div>
+                
             </div>
             <div className='flex flex-col'>
                 <label htmlFor="" className='uppercase py-2 font-bold'>Email</label>
-                <input type="email" name="username" value={email} onChange={(e) => setEmail(e.target.value)} required  className='border-2 border-custom-blue p-3 rounded-md'/>
+                <div className='flex border-2 border-custom-blue p-3 rounded-md'>
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} required  className='w-full bg-custom-white outline-none'/> 
+                  <img src="../src/Image/account/Envelope.svg" alt="email" />
+                </div>
             </div>
             <div className='flex flex-col'>
                 <label htmlFor="" className='uppercase py-2 font-bold'>Password</label>
-                <input type="password" name="username" value={password} onChange={(e) => setPassword(e.target.value)} required className='border-2 border-custom-blue p-3 rounded-md'/>
+                <div className='flex border-2 border-custom-blue p-3 rounded-md'>
+                   <input type="password" name="password" value={formData.password} onChange={handleChange} required className='w-full bg-custom-white outline-none'/>
+                   <img src="../src/Image/account/Password.svg" alt="" />
+                </div>
+                
             </div>
 
             <NavLink to="/education">
-                <button type="submit" className='bg-custom-blue text-custom-white p-3 text-size-15px hover:font-extrabold rounded-md my-5 font-semibold uppercase w-full'>Sign Up</button>
+                <button type="submit" className='bg-custom-blue text-custom-white p-3 text-size-15px hover:font-extrabold rounded-md my-5 font-semibold uppercase w-full'>Daftar</button>
             </NavLink>
         </form>
         <p className='text-justify font-josefin'>By clicking the Sign in Button, you therefore agree to the private Policy.For more information, read about our privacy here</p>
@@ -75,8 +87,8 @@ const Register = () => {
                     <div className=''>
                         <img src="../src/logo.png" alt="img1"  width={200} className='ml-10 mt-5 flex'/>
                     </div>
-                    <div className='flex justify-center items-center mt-10'>
-                        <img src="../src/Image/account/Sign Up.png" alt="img2" width={500}/>
+                    <div className='flex justify-center items-center mt-8'>
+                        <img src="../src/Image/account/Sign Up.png" alt="img2" className='  xl:w-4/6'/>
                     </div>
                 </div>
             </div>

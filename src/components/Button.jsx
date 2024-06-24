@@ -3,16 +3,20 @@ import { NavLink } from 'react-router-dom';
 
 const Button = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null)
 
   const handleAuthClick = () => {
     if (isLoggedIn) {
       // Tambahkan logika logout di sini
       setIsLoggedIn(false);
+      setUser(null)
     } else {
       // Tambahkan logika login di sini
       setIsLoggedIn(true);
+      setUser(true)
     }
   };
+
 
   return (
     <nav className=" bg-custom-blue p-4 font-normal text-custom-white font-poppins">
@@ -54,11 +58,12 @@ const Button = () => {
 
         {isLoggedIn ? (
             <>
+              
               <button
                 onClick={handleAuthClick}
-                className="p-2 bg-custom-pink rounded-[7px] duration-[2000ms] hover:scale-90"
+                className="p-2 bg-custom-white rounded-full duration-[1000ms] "
               >
-                <NavLink to='/'>logout</NavLink>
+                <NavLink to='/'><img src="../src/Image/account/Person.svg" alt="profile" /></NavLink>
               </button>
             </>
           ) : (

@@ -1,19 +1,24 @@
 import Footer from '../components/Footer'
-import React from 'react'
+import React, { useState } from 'react'
 import Message from '../components/Message'
-import Button from '../components/Button'
+import Navbar from '../components/Navbar'
+import NewTopic from '../components/NewTopic'
+import CreatePost from '../components/CreatePost'
 
 
 function Forum(props) {
+  const [showMessage, setShowMessage ] = useState(false)
+
   return (
     <>
-    {/* <Navbar /> */}
-    <Button/>
-    <div className='flex flex-row bg-custom-blue p-10 gap-10 font-poppins px-44 md:px-10'>
-      <div className='bg-custom-white flex flex-col p-7 rounded-xl gap-5 md:w-4/5 xl:w-2/5 container mx-auto'>
+
+    <Navbar/>
+    <div className='flex flex-row bg-custom-blue p-3 gap-10 font-poppins md:px-10 sm:px-5 sm:grid lg:flex lg:flex-row md:flex md:flex-row xl:text-2xl lg:text-xl md:text-[20px] sm:text-size-15px'>
+      <div className='flex flex-row container mx-auto gap-5'>
+        <div className='bg-custom-white flex flex-col p-7 rounded-xl gap-5 md:w-4/5 xl:w-2/5 '>
       <div className='flex bg-custom-blue w-full text-custom-white p-3 px-6 gap-2 font-semibold rounded-lg justify-center xl:text-[20px]'>
         <img src="../src/Image/Forum/Plus Math.svg" alt="haloo" />
-        <button>Start New Topic</button>
+        <button onClick={() => setShowMessage(true)}>Start New Topic</button>
       </div>
 
       <div className='flex flex-col gap-5 my-10 text-custom-blue justify-center '>
@@ -69,7 +74,7 @@ function Forum(props) {
         </div>
       </div>
 
-      <div className='flex flex-col gap-2 text-custom-white font-semibold '>
+      <div className='flex flex-col gap-2 text-custom-white font-semibold  '>
         <h1 className=' text-custom-blue mb-5 mt-5 text-[20px]'>Popular Tags</h1>
         <div className='grid grid-flow- gap-1 text-[16px]'>
           <p className='bg-custom-blue w-fit p-3 rounded-2xl'>Diabetes</p>
@@ -82,8 +87,9 @@ function Forum(props) {
     </div>
 
     {/* Right */}
+    <CreatePost/>
 
-    <div className=' flex flex-col items-center container mx-auto'>
+    <div className=' flex flex-col items-center container mx-auto xl:text-p lg:text-2xl md:text-[20px] sm:text-size-15px'>
     <div className='flex flex-col'>
     <Message image="../src/Image/Forum/profile.svg" user="Nunik" time="1hrs ago" message="gejala umum apa sih yang memungkinkan seseorang terkena penyakit diabetes " />
     <br />
@@ -101,8 +107,11 @@ function Forum(props) {
     
     </div>
     
+    </div>
+      
 
     </div>
+    {showMessage && <NewTopic onClose={() => setShowMessage(false)} />}
     <Footer/>
     </>
   )
