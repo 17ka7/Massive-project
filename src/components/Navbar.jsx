@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 
-export const Navbar = () => {
+export const Navbar = ({isLoggedIn}) => {
   const [isOpen, setIsOpen] = useState(false)
   
   const toggleMenu = () => {
@@ -49,7 +49,15 @@ export const Navbar = () => {
         </ul>
       </nav>
       <div className="p-2 bg-custom-pink rounded-[7px] duration-[2000ms] hover:scale-125">
-          <button><NavLink className={({isActive}) => isActive? 'font-semibold' : 'text-pink'} to="/login">Login</NavLink></button>
+      {isLoggedIn ? (
+              <Link to="/education">
+                <button className="font-semibold">Profile</button>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <button>Login</button>
+              </Link>
+              )}
       </div>
       </div>
     </div>

@@ -1,9 +1,6 @@
 import React, {useState} from 'react'
 
 
-
-
-
 const NewTopic = ({onClose, addPost}) => {
   const [content, setContent] = useState('')
 

@@ -3,11 +3,16 @@ import React, { useState } from 'react'
 import Message from '../components/Message'
 import Navbar from '../components/Navbar'
 import NewTopic from '../components/NewTopic'
-import CreatePost from '../components/CreatePost'
 
 
 function Forum(props) {
   const [showMessage, setShowMessage ] = useState(false)
+  const [posts, setPosts] = useState([]);
+  const [isAddingPost, setIsAddingPost] = useState(false);
+
+  const addPost = (post) => {
+    setPosts([post, ...posts]);
+  };
 
   return (
     <>
@@ -18,8 +23,12 @@ function Forum(props) {
         <div className='bg-custom-white flex flex-col p-7 rounded-xl gap-5 md:w-4/5 xl:w-2/5 '>
       <div className='flex bg-custom-blue w-full text-custom-white p-3 px-6 gap-2 font-semibold rounded-lg justify-center xl:text-[20px]'>
         <img src="../src/Image/Forum/Plus Math.svg" alt="haloo" />
-        <button onClick={() => setShowMessage(true)}>Start New Topic</button>
+        <button onClick={() => setIsAddingPost(true)}>Start New Topic</button>
       </div>
+      {isAddingPost && (
+        <NewTopic onClose={() => setIsAddingPost(false)}
+        addPost={addPost} />
+      )}
 
       <div className='flex flex-col gap-5 my-10 text-custom-blue justify-center '>
         <h4 className=' font-semibold text-[20px]'>Top Members</h4>
@@ -86,10 +95,26 @@ function Forum(props) {
       </div>
     </div>
 
-    {/* Right */}
-    <CreatePost/>
-
     <div className=' flex flex-col items-center container mx-auto xl:text-p lg:text-2xl md:text-[20px] sm:text-size-15px'>
+    {posts.length === 0 ? (
+          <p ></p>
+        ) : (
+          posts.map((post, index) => (
+            <div className='flex flex-col gap-5 font-poppins'>
+      <div key={index} className=' bg-custom-white flex flex-col rounded-2xl gap-5 p-5 xl:text-[20px] lg:text-2xl md:text-[20px] sm:text-size-15px w-full'>
+        {/* <div className='bg-custom-white w-full flex flex-row justify-between text-custom-blue items-center font-semibold'>
+          <div div className='flex gap-3 items-center text-[20px] '>
+            <img src={props.image} alt="halo" width={50} />
+            <h3>Post by {props.user}</h3>
+          </div>
+          <p>{props.time} </p>
+        </div> */}
+        <p className='p-3 px-6'>{post.content}</p>
+      </div>
+    </div>
+
+          ))
+        )}
     <div className='flex flex-col'>
     <Message image="../src/Image/Forum/profile.svg" user="Nunik" time="1hrs ago" message="gejala umum apa sih yang memungkinkan seseorang terkena penyakit diabetes " />
     <br />

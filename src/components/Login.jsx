@@ -1,33 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import axios from 'axios';
 
-const Login = ({user, setLoggedIn}) => {
-    const [formData, setFormData] = useState({
-        username: '', password: '', message: ''
-    })
+const Login = ({onLogin}) => {
+    const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-    const handleChange = (e) =>{
-        const {name, value} = e.target;
-        setFormData((prevData) => ({
-            ...prevData, [name]: value,
-        }))
-    }
-
-    
-    const handSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('/api/users/login', formData)
-            const {token} = response.data;
-            localStorage.setItem('token', token) // simpan token di localstorage
-            setLoggedIn(true); //set state untuk menunjukkan user sudah login
-        } catch (error) {
-            console.error('Login failed:', error)
-            alert('Invalid credentials');
-        }
-        
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userData = { username, password }; // For simplicity, we are not verifying credentials
+    onLogin(userData);
+  };
 
   return (
     <>
@@ -65,12 +47,16 @@ const Login = ({user, setLoggedIn}) => {
                 </Link>      
             </div>
 
-            <form onSubmit={handSubmit}  action="" className='flex flex-col pt-8 font-poppins text-[17px] sm:text-xs md:text-xl lg:font-1xl xl:text-2xl '>
+            <form onSubmit={handleSubmit}  action="" className='flex flex-col pt-8 font-poppins text-[17px] sm:text-xs md:text-xl lg:font-1xl xl:text-2xl '>
                 <div className='flex flex-col'>
                     <label htmlFor="username" className='uppercase py-2 
                     font-bold'>Username</label>
                     <div className='flex border-2 border-custom-blue p-3 rounded-md'>
-                      <input type="text" name='username' value={formData.username} onChange={handleChange} required className='w-full bg-custom-white outline-none text-xl'/>
+                      <input type="text"
+                        placeholder=""
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required className='w-full bg-custom-white outline-none text-xl'/>
                       <img src="../src/Image/account/Person.svg" alt="" />  
                     </div>
                     
@@ -78,7 +64,11 @@ const Login = ({user, setLoggedIn}) => {
                 <div className='flex flex-col'>
                     <label htmlFor="password" className='uppercase py-2 font-bold'>Password</label>
                     <div className='flex border-2 border-custom-blue p-3 rounded-md'>
-                     <input type="password" name='password' value={formData.password} onChange={handleChange} required className='w-full bg-custom-white outline-none' />
+                     <input type="password"
+                        placeholder=""
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required className='w-full bg-custom-white outline-none' />
                      <img src="../src/Image/account/Password.svg" alt="" />   
                     </div>
                     

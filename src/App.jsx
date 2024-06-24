@@ -13,8 +13,17 @@ import User from './pages/User';
 import { useState } from 'react';
 
 function App() {
-  const [user, setUser] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    // Logika untuk menandai pengguna telah login
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    // Logika untuk menandai pengguna telah logout
+    setIsLoggedIn(false);
+  };
   return (
     <Router>
       <Routes>
@@ -23,12 +32,12 @@ function App() {
         <Route path="/predict" element={<Predict />} />
         <Route path="/healthcontrol" element={<HealthControl/>} />
         <Route path="/Forum" element={<Forum />} />
-        <Route path="/login" element={user && !loggedIn && <Login user={user} setLoggedIn={setLoggedIn} />} />
-        <Route path='/register' element={!user && <Register setUser={setUser} />}/>
-        <Route path='/test' element={<Test/>} />
+        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/register" element={<Register />}/>
+        <Route path="/test" element={<Test/>} />
 
-        <Route path='/health1' element={<Health1/>} />
-        <Route path='/user' element={user && loggedIn &&<User user={user}/>} />
+        <Route path="/article" element={<Health1/>} />
+        <Route path="/user" element={<User />} />
       </Routes>
     </Router>
   );

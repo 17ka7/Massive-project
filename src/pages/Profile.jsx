@@ -1,17 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import Footer from '../components/Footer'
+import React from 'react'
 
-
-const User = () => {
-
-  const handleLogout = () => {
-    // Lakukan logout dengan menghapus data atau state login dan redirect ke halaman awal
-    // Misalnya, menghapus token atau mengatur ulang state isLoggedIn
-    history.push('/');
-  };
-
+const Profile = () => {
   return (
     <>
+    <div>profile</div>
     <div>
         <div className='flex flex-col gap-1 bg-custom-blue text-custom-white'>
         <div className='container mx-auto mt-10 text-xl pb-2'>
@@ -75,10 +67,8 @@ const User = () => {
     </div>  
     
     </div>
-    
-    <Footer/>
     </>
   )
 }
 
-export default User
+export default Profile

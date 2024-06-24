@@ -1,33 +1,20 @@
 import React, { useState } from 'react'
-import { Link, NavLink, json } from 'react-router-dom'
+import { Link, NavLink,} from 'react-router-dom'
 
-const Register = ({setUser}) => {
-    const [formData, setFormData] =useState({
-        username: '', password: '', email: '', message: ''
-    });
-
-    
-
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setFormData((prevData) => ({
-            ...prevData, [name]: value,
-        }));
-    }
-    const handleSubmit = async (e) => {
+const Register = ({onSignup}) => {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+  
+    const handleSubmit = (e) => {
         e.preventDefault();
-        try {
-            //respon backend bisa melakukan sesuatu dengan data response
-            const response = await axios.post('/api/users/register', formData)
-            console.log('Registration successful:', response.data);
-            setUser(response.data) // Contoh, set user state setelah register
-            // Redirect atau tindakan lain setelah pendaftaran berhasil
-        } catch (error) {
-            console.error('Registration failed:', error);
-        }
-        
-    }
-
+        const userData = { username, email, password };
+        // Panggil fungsi onSignup untuk menyimpan data pengguna dan menandai sebagai login
+        onSignup(userData);
+        // Redirect ke halaman user setelah berhasil signup
+        history.push('/user');
+      };
+  
   return (
     <>
     <div className='bg-custom-white flex flex-row h-screen'>
@@ -50,7 +37,11 @@ const Register = ({setUser}) => {
             <div className='flex flex-col'>
                 <label htmlFor="" className='uppercase py-2 font-bold'>Username</label>
                 <div className='flex border-2 border-custom-blue p-3 rounded-md'>
-                  <input type="text" name="username" value={formData.username} onChange={handleChange} required className=' w-full outline-none bg-custom-white'/> 
+                  <input type="text"
+                    placeholder=""
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required className=' w-full outline-none bg-custom-white'/> 
                   <img src="../src/Image/account/Person.svg" alt="person" /> 
                 </div>
                 
@@ -58,14 +49,21 @@ const Register = ({setUser}) => {
             <div className='flex flex-col'>
                 <label htmlFor="" className='uppercase py-2 font-bold'>Email</label>
                 <div className='flex border-2 border-custom-blue p-3 rounded-md'>
-                  <input type="email" name="email" value={formData.email} onChange={handleChange} required  className='w-full bg-custom-white outline-none'/> 
+                  <input type="email"
+                    placeholder=""
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)} required  className='w-full bg-custom-white outline-none'/> 
                   <img src="../src/Image/account/Envelope.svg" alt="email" />
                 </div>
             </div>
             <div className='flex flex-col'>
                 <label htmlFor="" className='uppercase py-2 font-bold'>Password</label>
                 <div className='flex border-2 border-custom-blue p-3 rounded-md'>
-                   <input type="password" name="password" value={formData.password} onChange={handleChange} required className='w-full bg-custom-white outline-none'/>
+                   <input type="password"
+                    placeholder=""
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required className='w-full bg-custom-white outline-none'/>
                    <img src="../src/Image/account/Password.svg" alt="" />
                 </div>
                 
