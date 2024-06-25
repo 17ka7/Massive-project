@@ -1,23 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 const Login = ({onLogin}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Simulasi autentikasi (cek jika username dan password cocok)
-        if (username === 'user' && password === 'password') {
-          const userData = { username };
-          localStorage.setItem('user', JSON.stringify(userData)); // Simpan data user di local storage
-          onLogin(userData); // Panggil callback untuk menyimpan status login
-        } else {
-          alert('Username atau password salah');
-        }
-      };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (username.trim() === '' || password.trim() === '') {
+      alert('Please enter both username and user image URL.');
+      return;
+    }
+    // Simpan data pengguna di local storage
+    localStorage.setItem('username', username);
+    localStorage.setItem("password", password);
+    // Arahkan ke halaman /education
+    navigate('/user');
+    onLogin();
+  };
+
 
   return (
     <>
@@ -55,7 +57,7 @@ const Login = ({onLogin}) => {
                 </Link>      
             </div>
 
-            <form onSubmit={handleSubmit}  action="" className='flex flex-col pt-8 font-poppins text-[17px] sm:text-xs md:text-xl lg:font-1xl xl:text-2xl '>
+            <form onSubmit={handleLogin}  action="" className='flex flex-col pt-8 font-poppins text-[17px] sm:text-xs md:text-xl lg:font-1xl xl:text-2xl '>
                 <div className='flex flex-col'>
                     <label htmlFor="username" className='uppercase py-2 
                     font-bold'>Username</label>

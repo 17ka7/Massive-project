@@ -95,26 +95,38 @@ function Forum(props) {
       </div>
     </div>
 
-    <div className=' flex flex-col items-center container mx-auto xl:text-p lg:text-2xl md:text-[20px] sm:text-size-15px'>
+    <div className=' flex flex-col items-center container mx-auto xl:text-p lg:text-2xl md:text-[20px] sm:text-size-15px px-10'>
     {posts.length === 0 ? (
+          <p></p>
+        ) : (
+          posts.map((post, index) => (
+            <div key={index} className='bg-custom-white flex flex-col rounded-2xl gap-5 p-5 xl:text-[20px] lg:text-2xl md:text-[20px] sm:text-size-15px w-full'>
+              <h3 className='font-semibold'>{post.userName}</h3>
+              <p className='p-3 px-10'>{post.content}</p>
+            </div>
+          ))
+        )}
+
+
+    {/* {posts.length === 0 ? (
           <p ></p>
         ) : (
           posts.map((post, index) => (
             <div className='flex flex-col gap-5 font-poppins'>
       <div key={index} className=' bg-custom-white flex flex-col rounded-2xl gap-5 p-5 xl:text-[20px] lg:text-2xl md:text-[20px] sm:text-size-15px w-full'>
-        {/* <div className='bg-custom-white w-full flex flex-row justify-between text-custom-blue items-center font-semibold'>
+        <div className='bg-custom-white w-full flex flex-row justify-between text-custom-blue items-center font-semibold'>
           <div div className='flex gap-3 items-center text-[20px] '>
             <img src={props.image} alt="halo" width={50} />
             <h3>Post by {props.user}</h3>
           </div>
           <p>{props.time} </p>
-        </div> */}
+        </div>
         <p className='p-3 px-6'>{post.content}</p>
       </div>
     </div>
 
           ))
-        )}
+        )} */}
     <div className='flex flex-col'>
     <Message image="../src/Image/Forum/profile.svg" user="Nunik" time="1hrs ago" message="gejala umum apa sih yang memungkinkan seseorang terkena penyakit diabetes " />
     <br />

@@ -20,11 +20,11 @@ function Education() {
         <h1 className=' font-bold  md:text-[48px] justify-center items-center flex text-[25px] p-10'>Apa itu Diabetes ?</h1>
       </div>
       
-      <div className='container mx-auto py-10  '>
+      <div className='container mx-auto py-10 px-10 sm:px-0 md:px-5 lg:px-5 '>
         <div className='my-10'>
           <div>
             <p className='text-justify'>Diabetes adalah penyakit kronis yang ditandai dengan tingginya kadar gula darah. Glukosa merupakan sumber energi utama bagi sel tubuh manusia. Akan tetapi, pada penderita diabetes, glukosa tersebut tidak dapat digunakan oleh tubuh.</p>
-            <div className='flex flex-row gap-8 mt-8'>
+            <div className='flex flex-col gap-8 mt-8 sm:flex-row '>
               <div className='bg-custom-blue2 bg-opacity-40 p-8 rounded-lg flex flex-col  items-center gap-5'>
                 <h3 className='font-semibold'>Diabetes Tipe 1</h3>
                 <p className='text-justify'>Diabetes tipe 1 adalah kondisi medis dimana kadar gula dalam darah yang melebihi batas normal dan diakibatkan oleh tubuh tidak mampu menghasilkan hormon insulin secara optimal.</p>

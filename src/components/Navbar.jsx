@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 
-export const Navbar = ({isLoggedIn}) => {
+export const Navbar = ({ isLoggedIn, handleLogin, handleLogout, userInfo }) => {
   const [isOpen, setIsOpen] = useState(false)
   
   const toggleMenu = () => {
@@ -57,17 +57,31 @@ export const Navbar = ({isLoggedIn}) => {
         
         </ul>
       </nav>
-      <div className="p-2 bg-custom-pink rounded-[7px] duration-[2000ms] hover:scale-125">
-      {isLoggedIn ? (
-              <Link to="/education">
-                <button className="font-semibold">Profile</button>
-              </Link>
+      <div className="flex flex-col items-center justify-center">
+            {isLoggedIn ? (
+              <>
+                <img
+                  src={userInfo.avatar}
+                  alt="Profile"
+                  className="mb-4 rounded-full"
+                  style={{ width: "150px", height: "150px", objectFit: "cover" }}
+                />
+                <p>{userInfo.username}</p>
+                <button
+                  className="p-2 bg-custom-white rounded-full duration-[1000ms]"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </>
             ) : (
-              <Link to="/login">
-                <button>Login</button>
-              </Link>
-              )}
-      </div>
+              <NavLink to="/login">
+                <button className="p-2 bg-custom-pink rounded-[7px] duration-[2000ms] hover:scale-90" onClick={handleLogin}>
+                  Login
+                </button>
+              </NavLink>
+            )}
+          </div>
       </div>
     </div>
     </>

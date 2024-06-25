@@ -2,13 +2,29 @@ import React, {useState} from 'react'
 
 
 const NewTopic = ({onClose, addPost}) => {
-  const [content, setContent] = useState('')
+  const [content, setContent] = useState('');
 
-  const handleSubmit = (e) =>{
-    e.preventDefault()
-    addPost({content})
-    setContent('')
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (content.trim() === '') {
+      alert('Please enter some content.'); // Validasi sederhana untuk konten kosong
+      return;
+    }
+    const userName = localStorage.getItem('username');
+    const passWord =localStorage.getItem('password')
+    const userImage = localStorage.getItem('userImage');
+
+    // Menambahkan post dengan userImage dan userName dari local storage
+    addPost({
+      content,
+      userImage, // Path gambar user dari local storage
+      userName, // Nama user dari local storage
+    });
+    onClose(); // Panggil onClose setelah menambahkan post
+    setContent('');
+  };
+
+
   return (
     <>
     <div className='fixed inset-0 bg-custom-blue bg-opacity-50 backdrop-blur-sm flex justify-center items-center font-poppins py-9'>
@@ -31,7 +47,7 @@ const NewTopic = ({onClose, addPost}) => {
             <img src="../src/Image/Forum/Add image.svg" alt="upload image" width={50}/>
             <img src="../src/Image/Forum/Happy.svg" alt="emoji" width={50}/>
             <div className='bg-custom-blue text-custom-white font-semibold p-1 w-fit px-4 rounded-lg hover:font-bold  text-[20px]'>
-              <button type='submit' className=' hover:scale-105' onClick={onClose}>Send</button>
+              <button type='submit' className=' hover:scale-105'>Send</button>
             </div>
             </div>
             

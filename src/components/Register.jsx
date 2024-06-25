@@ -3,17 +3,19 @@ import { Link, NavLink,} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 
 const Register = ({onSignup}) => {
-const [username, setUsername] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-    const userData = { username, email, password, profilePicture: 'https://via.placeholder.com/150' };
-    localStorage.setItem('user', JSON.stringify(userData));
-    onSignup(userData);
-    navigate('/user'); // Redirect to the user page after signup
+    // Simpan data pengguna di local storage
+    localStorage.setItem('username', username);
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
+    // Arahkan ke halaman /user setelah berhasil mendaftar
+    navigate('/user');
   };
   
   return (
@@ -34,7 +36,7 @@ const [username, setUsername] = useState('');
             <p>Sudah punya akun ?</p>
             <Link to="/login"><button type='submit' className='text-custom-blue pl-2 font-josefin'>Masuk</button></Link>
         </div>
-        <form onSubmit={handleSubmit} action="" className='flex flex-col pt-10 font-poppins text-size-15px sm:text-xs md:text-xl lg:font-1xl xl:text-2xl'>
+        <form onSubmit={handleRegister} action="" className='flex flex-col pt-10 font-poppins text-size-15px sm:text-xs md:text-xl lg:font-1xl xl:text-2xl'>
             <div className='flex flex-col'>
                 <label htmlFor="" className='uppercase py-2 font-bold'>Username</label>
                 <div className='flex border-2 border-custom-blue p-3 rounded-md'>
