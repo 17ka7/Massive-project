@@ -28,7 +28,7 @@ function HealthControl() {
             <NavLink to='/' className={({isActive}) => isActive? 'text-custom-blue font-semibold pl-5 text-wrap' : 'text-pink'}>
                 <button type="button" className=' hover:font-semibold hover:text-custom-blue text-custom-blue'>Baca Selengkapnya</button>
             </NavLink>
-            <div className='grid grid-rows-2 grid-flow-col gap-x-6 gap-y-6 mt-3'>
+            <div className='grid grid-rows-2 grid-flow-col gap-x-9 gap-y-9 mt-3'>
                 <div className=' bg-custom-blue2 bg-opacity-40 rounded-xl row-span-2 cursor-pointer hover:scale-105'>
                     <img src="../src/image/health/health2.png" alt="health2" className=' xl:w-full rounded-t-lg' />
                     <div className='flex flex-col gap-10 p-5 '>
@@ -56,7 +56,7 @@ function HealthControl() {
 
 
         <div className=' bg-custom-blue2 bg-opacity-40 flex flex-col justify-center content-center items-center mb-24 text-custom-white py-9'>
-                    <h1 className=' font-bold text-custom-black'>Dokter kami :</h1>
+                    <h1 className=' font-bold text-custom-black text-size-15px xl:text-[36px]'>Dokter kami :</h1>
                     <div className='grid grid-cols-2 gap-10 justify-center xl:w-fit lg:w-1/2 md:w-1/2 sm:w-1/2 w-1/2'>
                         
                         <div className=' bg-custom-blue2 rounded-t-[999px] xl:w-fit md:w-fit lg:w-fit sm:w-fit hover:scale-105'>

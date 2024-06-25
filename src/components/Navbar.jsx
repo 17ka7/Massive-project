@@ -17,7 +17,16 @@ export const Navbar = ({isLoggedIn}) => {
         <div>
           <img src="../src/logo.png" alt="DiabeTech" className="xl:w-fit lg:w-40 md:w-32 sm: w-24"/>
         </div>
-        <nav className="flex justify-center">
+
+        {/* Tombol Toggle untuk Menu Mobile */}
+        <button
+            className="block xl:hidden md:hidden lg:hidden sm:block text-pink"
+            onClick={toggleMenu}
+          >
+            {isOpen ? "X" : "Menu"}
+          </button>
+        
+        <nav className={`${isOpen ? "block" : "hidden"} xl:flex md:flex lg:flex flex-col xl:flex-row md:flex-row lg:flex-row items-center mt-4 xl:mt-0 md:mt-0 lg:mt-0`}>
         <ul className="flex flex-row gap-8 items-center">
 
           <li>

@@ -9,8 +9,19 @@ const Test = () => {
   let [question, setQuestion] = useState(Quizdata[index])
   let [lock, setLock] = useState(false)
   let[score, setScore] = useState(0)
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showResult, setShowResult] = useState(false); 
   
+  const selectAnswer = (option) => {
+    if (!lock) {
+      setSelectedAnswer(option);
+      setLock(true); // Mengunci pilihan setelah dipilih
+      // Jika jawaban benar, tambahkan skor
+      if (option === question.answer) {
+        setScore((prevScore) => prevScore + 1);
+      }
+    }
+  };
 
   //check jawaban
  const checkAns = () => {
@@ -67,7 +78,10 @@ const Test = () => {
 
                 <ul className='flex flex-col gap-3 xl:text-[20px] md:text-[18px]'>
                 {Quizdata[index].option.map((option, i)=>(
-                    <li key={option.i} className='rounded-xl  p-5 bg-custom-white hover:border-custom-blue hover:border'>{option}</li>
+                    <li key={option.i} className={`rounded-xl p-5 bg-custom-white hover:border-custom-blue hover:border ${
+                      selectedAnswer === option ? 'selected' : ''
+                    }`} 
+                    >{option}</li>
                 )
                 )}
                 

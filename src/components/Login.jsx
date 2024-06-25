@@ -1,15 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({onLogin}) => {
     const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const userData = { username, password }; // For simplicity, we are not verifying credentials
-    onLogin(userData);
-  };
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Simulasi autentikasi (cek jika username dan password cocok)
+        if (username === 'user' && password === 'password') {
+          const userData = { username };
+          localStorage.setItem('user', JSON.stringify(userData)); // Simpan data user di local storage
+          onLogin(userData); // Panggil callback untuk menyimpan status login
+        } else {
+          alert('Username atau password salah');
+        }
+      };
 
   return (
     <>

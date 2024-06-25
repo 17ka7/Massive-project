@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import { Link, NavLink,} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 const Register = ({onSignup}) => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-  
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const userData = { username, email, password };
-        // Panggil fungsi onSignup untuk menyimpan data pengguna dan menandai sebagai login
-        onSignup(userData);
-        // Redirect ke halaman user setelah berhasil signup
-        history.push('/user');
-      };
+const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userData = { username, email, password, profilePicture: 'https://via.placeholder.com/150' };
+    localStorage.setItem('user', JSON.stringify(userData));
+    onSignup(userData);
+    navigate('/user'); // Redirect to the user page after signup
+  };
   
   return (
     <>

@@ -3,13 +3,14 @@ import Footer from '../components/Footer'
 
 
 const User = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
 
-  const handleLogout = () => {
-    // Lakukan logout dengan menghapus data atau state login dan redirect ke halaman awal
-    // Misalnya, menghapus token atau mengatur ulang state isLoggedIn
-    history.push('/');
+  const handleSave = () => {
+    // Logic untuk menyimpan perubahan user
+    console.log('Saved:', { username, email });
   };
-
+  
   return (
     <>
     <div>

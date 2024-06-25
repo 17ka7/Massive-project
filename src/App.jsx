@@ -13,16 +13,19 @@ import User from './pages/User';
 import { useState } from 'react';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
 
-  const handleLogin = () => {
-    // Logika untuk menandai pengguna telah login
-    setIsLoggedIn(true);
+  const handleLogin = (userData) => {
+    setCurrentUser(userData);
+  };
+
+  const handleSignup = (userData) => {
+    setCurrentUser(userData);
   };
 
   const handleLogout = () => {
-    // Logika untuk menandai pengguna telah logout
-    setIsLoggedIn(false);
+    localStorage.removeItem('user');
+    setCurrentUser(null);
   };
   return (
     <Router>
@@ -33,7 +36,7 @@ function App() {
         <Route path="/healthcontrol" element={<HealthControl/>} />
         <Route path="/Forum" element={<Forum />} />
         <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path="/register" element={<Register />}/>
+        <Route path="/register" element={<Register onSignup={handleSignup} />}/>
         <Route path="/test" element={<Test/>} />
 
         <Route path="/article" element={<Health1/>} />
